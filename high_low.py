@@ -6,43 +6,44 @@ wanna_play = input("Would you like to play some high-low? Type 'yes' or 'no': ")
 
 
 def high_low():
-    # wanna_play = input("Would you like to play some high-low? Type 'yes' or 'no': ").lower()
     if wanna_play == "yes":
         game_over = False
+        count = 0
         print(logo)
         A = random.choice(data)
         print(f"\nCompare A: {A['name']}, a {A['description']}, from {A['country']}.")
         print(vs)
         B = random.choice(data)
         print(f"\nCompare B: {B['name']}, a {B['description']}, from {B['country']}.\n")
-
         while not game_over:
-            more_followers = input("Who has more followers? Type 'A' or 'B': ")
-            if more_followers == 'A' and (A["follower_count"] > B["follower_count"]):
-                A = A
+            if A['name'] == B['name'] or B['name'] == A['name']:
                 B = random.choice(data)
-                print("\n--------------------------------------------------------------------------------")
-                print(f"\nCompare A: {A['name']}, a {A['description']}, from {A['country']}.")
-                print(f"\nCompare B: {B['name']}, a {B['description']}, from {B['country']}.\n")
-                game_over = False
-            elif more_followers == 'B' and (A["follower_count"] > B["follower_count"]):
-                game_over = True
-            elif more_followers == 'B' and (A["follower_count"] < B["follower_count"]):
-                A = B
-                B = random.choice(data)
-                print("\n--------------------------------------------------------------------------------")
-                print(f"\nCompare A: {A['name']}, a {A['description']}, from {A['country']}.")
-                print(f"\nCompare B: {B['name']}, a {B['description']}, from {B['country']}.\n")
-                game_over = False
-            elif (more_followers == 'A' or more_followers == 'B') and (A["follower_count"] == B["follower_count"]):
-                A = B
-                B = random
-                print("\n--------------------------------------------------------------------------------")
-                print(f"\nCompare A: {A['name']}, a {A['description']}, from {A['country']}.")
-                print(f"\nCompare B: {B['name']}, a {B['description']}, from {B['country']}.\n")
-                game_over = False
             else:
-                game_over = True
+                more_followers = input("Who has more followers? Type 'A' or 'B': ")
+                if more_followers == 'A' and (A["follower_count"] > B["follower_count"]):
+                    print("\n--------------------------------------------------------------------------------")
+                    count += 1
+                    A = A
+                    B = random.choice(data)
+                    print(f"You're right! Current score: {count}")
+                    print(f"\nCompare A: {A['name']}, a {A['description']}, from {A['country']}.")
+                    print(f"\nCompare B: {B['name']}, a {B['description']}, from {B['country']}.\n")
+                #             game_over = False
+                #                 elif more_followers == 'B' and (A["follower_count"] > B["follower_count"]):
+                #                     game_over = True
+                elif more_followers == 'B' and (A["follower_count"] < B["follower_count"]):
+                    print("\n--------------------------------------------------------------------------------")
+                    count += 1
+                    A = B
+                    B = random.choice(data)
+                    print(f"You're right! Current score: {count}")
+                    print(f"\nCompare A: {A['name']}, a {A['description']}, from {A['country']}.")
+                    print(f"\nCompare B: {B['name']}, a {B['description']}, from {B['country']}.\n")
+
+                else:
+                    game_over = True
+                    print("\n--------------------------------------------------------------------------------")
+                    print(f"\nSorry, that's wrong! Final score: {count}")
 
     else:
         exit("Thanks for coming. Goodbye....")
