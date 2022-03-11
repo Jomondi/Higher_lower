@@ -51,11 +51,13 @@ def high_low():
 
 def play_again():
     print("\n--------------------------------------------------------------------------------")
-    go_again = input("\nWould you like to go again? Type 'yes' or 'no': ").lower()
-    if go_again == 'yes':
-        high_low()
-    else:
-        exit("Thanks for coming. Goodbye ")
+    # go_again = input("\nWould you like to go again? Type 'yes' or 'no': ").lower()
+    while True:
+        go_again = input("\nWould you like to go again? Type 'yes' or 'no': ").lower()
+        if go_again == 'yes':
+            high_low()
+        else:
+            exit("Thanks for coming. Goodbye ")
 
 
 high_low()
